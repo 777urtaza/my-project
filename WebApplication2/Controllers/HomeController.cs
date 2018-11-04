@@ -11,6 +11,7 @@ namespace WebApplication9.Controllers
     public class HomeController : Controller
     {
         GhoomoDbContext db = new GhoomoDbContext();
+        user user2;
         public ActionResult Index()
         {
             return View(db);
@@ -51,7 +52,7 @@ namespace WebApplication9.Controllers
             if (user.Count == 1)
             {
                 Session["userName"] = user.First().userName;
-                var user2 = user.Single();
+                user2 = user.Single();
                 if (user2.roleID == 1)
                     return Redirect(Url.Action("Index", "Home"));
                 else
@@ -72,27 +73,30 @@ namespace WebApplication9.Controllers
         }
         public ActionResult Scrapbook()
         {
+
             return View();
         }
         [HttpPost]
-        public ActionResult Scrapbook(HttpPostedFileBase picture)
+        public ActionResult Scrapbook(HttpPostedFileBase picture, String tag)
         {
             if (picture != null && picture.ContentLength > 0)
                 try
                 {
-                    string path = Path.Combine(Server.MapPath("~/Images"),
-                                               Path.GetFileName(picture.FileName));
 
-                    scrabbook model = new scrabbook();
-                    model.userid = 1;
-                    model.image = path;
-                    model.tag = "#asd";
-                    if (ModelState.IsValid)
+                    string fileName = System.IO.Path.GetFileName(picture.FileName);
+                    //Set the Image File Path.
+                    string path = "~/Images/" + fileName;
+                    //Save the Image File in Folder.
+                    picture.SaveAs(Server.MapPath(path));
+
+                    db.scrabbooks.Add(new scrabbook
                     {
-                        db.scrabbooks.Add(model);
-                        db.SaveChanges();
-                    }
-                    picture.SaveAs(path);
+                        userid = 1,
+                        image = path,
+                        tag = tag
+                    });
+                    db.SaveChanges();
+                    
                     ViewBag.Message = "File uploaded successfully";
                 }
                 catch (Exception ex)

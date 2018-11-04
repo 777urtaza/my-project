@@ -1,4 +1,4 @@
-﻿@model WebApplication2.Models.GhoomoDbContext
+﻿@model WebApplication2.Models.user
 @{
     ViewBag.Title = "Scrapbook";
 }
@@ -13,14 +13,15 @@
         @using (Html.BeginForm("Scrapbook", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="form-group">
+                
                 <label>Upload picture</label>
                 <div class="input-group">
-                    @Html.TextBox("image", "", new { type = "file" })<br />
+                    @Html.TextBox("picture", "", new { type = "file" })<br />
                     <input type="submit" value="Upload picture" />
                 </div>
                 <label>Tag</label>
                 <div class="input-group">
-                    @Html.TextBox("tag")
+                    @Html.TextBox("tag", "");
                 </div>
             </div>
         }
