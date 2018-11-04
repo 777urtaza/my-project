@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1af44777ba884c64a48f4174b8005a5f" Name="Diagram1" ZoomLevel="87">
+        <EntityTypeShape EntityType="GhoomoDb.Comment" Width="1.5" PointX="6.875" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.Conversation" Width="1.5" PointX="1.25" PointY="11.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.conversationReply" Width="1.5" PointX="3.125" PointY="11.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.Destination" Width="1.5" PointX="10.625" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.image" Width="1.5" PointX="5" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.order" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.package" Width="1.5" PointX="8.75" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.Rating" Width="1.5" PointX="9.5" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.scrabbook" Width="1.5" PointX="2.625" PointY="14.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.user" Width="1.5" PointX="5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="GhoomoDb.vendor" Width="1.5" PointX="1" PointY="14.625" IsExpanded="true" />
+        <AssociationConnector Association="GhoomoDb.FK_Comments_package" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_Comments_users" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_Conversation_users" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_Conversation_vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_conversationReply_Conversation" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_conversationReply_users" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_Destination_package" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_images_Pakcage" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_order_package" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_order_users" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_package_vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_Rating_package" ManuallyRouted="false" >
+        </AssociationConnector>
+        <AssociationConnector Association="GhoomoDb.FK_Rating_users" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_scrabbook_users" ManuallyRouted="false" />
+        <AssociationConnector Association="GhoomoDb.FK_vendor_users" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

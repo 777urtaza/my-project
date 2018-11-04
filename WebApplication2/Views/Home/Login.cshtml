@@ -1,0 +1,16 @@
+﻿@model WebApplication2.Models.GhoomoDbContext
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<form method="post">
+    <p class="text-danger">@(ViewBag.msg)</p>
+
+    <input type="text" name="username" value="" placeholder="Enter Username" />
+
+    <input type="password" name="password" value="" placeholder="Enter password" />
+
+    <button name="submit" type="submit">Login</button>
+
+</form>

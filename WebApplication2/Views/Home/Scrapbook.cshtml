@@ -1,0 +1,34 @@
+﻿@model WebApplication2.Models.GhoomoDbContext
+@{
+    ViewBag.Title = "Scrapbook";
+}
+
+<!DOCTYPE html>
+<head>
+    <link href="~/Scripts/bootstrap.min.js" rel="stylesheet"/>
+</head>
+<body>
+    <div class="container">
+
+        @using(Html.BeginForm("Scrapbook","Home",FormMethod.Post, new {enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+                <label>Upload picture</label>
+                <div class="input-group">
+                    @Html.TextBox("picture", "", new { type="file"})<br />
+                    <input type="submit" value="Upload picture" />
+                </div>
+            </div>
+        }
+
+    </div>
+
+
+</body>
+
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+
+
+
+<h2>Scrapbook</h2>
+

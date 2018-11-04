@@ -1,0 +1,937 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="GhoomoDb.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Comments">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="com_datetime" Type="datetime" Nullable="false" />
+          <Property Name="comment" Type="text" />
+          <Property Name="packageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Conversation">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="vendorID" Type="int" Nullable="false" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="conversationReply">
+          <Key>
+            <PropertyRef Name="crID" />
+          </Key>
+          <Property Name="crID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="reply" Type="text" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="time" Type="datetime" Nullable="false" />
+          <Property Name="cID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="destID" />
+          </Key>
+          <Property Name="destID" Type="int" Nullable="false" />
+          <Property Name="destination_Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="packageID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="images">
+          <Key>
+            <PropertyRef Name="imageID" />
+          </Key>
+          <Property Name="imageID" Type="int" Nullable="false" />
+          <Property Name="imagePath" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="packageID" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="int" Nullable="false" />
+          <Property Name="packageID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="package">
+          <Key>
+            <PropertyRef Name="packageID" />
+          </Key>
+          <Property Name="packageID" Type="int" Nullable="false" />
+          <Property Name="packageName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="packageDescription" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="vendorID" Type="int" Nullable="false" />
+          <Property Name="packagePrice" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="itenerary" Type="text" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ratingID" />
+          </Key>
+          <Property Name="ratingID" Type="int" Nullable="false" />
+          <Property Name="packageID" Type="int" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="rate" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="scrabbook">
+          <Key>
+            <PropertyRef Name="scrabID" />
+          </Key>
+          <Property Name="scrabID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="userid" Type="int" Nullable="false" />
+          <Property Name="image" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="tag" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="int" Nullable="false" />
+          <Property Name="roleID" Type="int" Nullable="false" />
+          <Property Name="firstName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="lastName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="contact" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="address" Type="varchar" MaxLength="50" />
+          <Property Name="dOB" Type="date" />
+        </EntityType>
+        <EntityType Name="vendor">
+          <Key>
+            <PropertyRef Name="vendorID" />
+          </Key>
+          <Property Name="vendorID" Type="int" Nullable="false" />
+          <Property Name="companyName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="userID" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Comments_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comments" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_vendor">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="1" />
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorID" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="vendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_conversationReply_Conversation">
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="1" />
+          <End Role="conversationReply" Type="Self.conversationReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversation">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="conversationReply">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_conversationReply_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="conversationReply" Type="Self.conversationReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="conversationReply">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Destination_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="Destination" Type="Self.Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="Destination">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_images_Pakcage">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="images" Type="Self.images" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_package_vendor">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="1" />
+          <End Role="package" Type="Self.package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorID" />
+            </Principal>
+            <Dependent Role="package">
+              <PropertyRef Name="vendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_scrabbook_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="scrabbook" Type="Self.scrabbook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="scrabbook">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vendor_users">
+          <End Role="users" Type="Self.users" Multiplicity="1" />
+          <End Role="vendor" Type="Self.vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="vendor">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GhoomoDbStoreContainer">
+          <EntitySet Name="Comments" EntityType="Self.Comments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Conversation" EntityType="Self.Conversation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="conversationReply" EntityType="Self.conversationReply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Destination" EntityType="Self.Destination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="images" EntityType="Self.images" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="order" EntityType="Self.order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="package" EntityType="Self.package" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Rating" EntityType="Self.Rating" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="scrabbook" EntityType="Self.scrabbook" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vendor" EntityType="Self.vendor" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Comments_package" Association="Self.FK_Comments_package">
+            <End Role="package" EntitySet="package" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_users" Association="Self.FK_Comments_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_users" Association="Self.FK_Conversation_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Conversation" EntitySet="Conversation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_vendor" Association="Self.FK_Conversation_vendor">
+            <End Role="vendor" EntitySet="vendor" />
+            <End Role="Conversation" EntitySet="Conversation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_conversationReply_Conversation" Association="Self.FK_conversationReply_Conversation">
+            <End Role="Conversation" EntitySet="Conversation" />
+            <End Role="conversationReply" EntitySet="conversationReply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_conversationReply_users" Association="Self.FK_conversationReply_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="conversationReply" EntitySet="conversationReply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Destination_package" Association="Self.FK_Destination_package">
+            <End Role="package" EntitySet="package" />
+            <End Role="Destination" EntitySet="Destination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_images_Pakcage" Association="Self.FK_images_Pakcage">
+            <End Role="package" EntitySet="package" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_package" Association="Self.FK_order_package">
+            <End Role="package" EntitySet="package" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_users" Association="Self.FK_order_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="order" EntitySet="order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_package_vendor" Association="Self.FK_package_vendor">
+            <End Role="vendor" EntitySet="vendor" />
+            <End Role="package" EntitySet="package" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_package" Association="Self.FK_Rating_package">
+            <End Role="package" EntitySet="package" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_users" Association="Self.FK_Rating_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Rating" EntitySet="Rating" />
+          </AssociationSet>
+          <AssociationSet Name="FK_scrabbook_users" Association="Self.FK_scrabbook_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="scrabbook" EntitySet="scrabbook" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vendor_users" Association="Self.FK_vendor_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="vendor" EntitySet="vendor" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="GhoomoDb" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Comment">
+          <Key>
+            <PropertyRef Name="commentID" />
+          </Key>
+          <Property Name="commentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="com_datetime" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="comment1" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="packageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="package" Relationship="Self.FK_Comments_package" FromRole="Comments" ToRole="package" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Comments_users" FromRole="Comments" ToRole="users" />
+        </EntityType>
+        <EntityType Name="Conversation">
+          <Key>
+            <PropertyRef Name="cID" />
+          </Key>
+          <Property Name="cID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="vendorID" Type="Int32" Nullable="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Conversation_users" FromRole="Conversation" ToRole="users" />
+          <NavigationProperty Name="vendor" Relationship="Self.FK_Conversation_vendor" FromRole="Conversation" ToRole="vendor" />
+          <NavigationProperty Name="conversationReplies" Relationship="Self.FK_conversationReply_Conversation" FromRole="Conversation" ToRole="conversationReply" />
+        </EntityType>
+        <EntityType Name="conversationReply">
+          <Key>
+            <PropertyRef Name="crID" />
+          </Key>
+          <Property Name="crID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="reply" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="time" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="cID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conversation" Relationship="Self.FK_conversationReply_Conversation" FromRole="conversationReply" ToRole="Conversation" />
+          <NavigationProperty Name="user" Relationship="Self.FK_conversationReply_users" FromRole="conversationReply" ToRole="users" />
+        </EntityType>
+        <EntityType Name="Destination">
+          <Key>
+            <PropertyRef Name="destID" />
+          </Key>
+          <Property Name="destID" Type="Int32" Nullable="false" />
+          <Property Name="destination_Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="packageID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="package" Relationship="Self.FK_Destination_package" FromRole="Destination" ToRole="package" />
+        </EntityType>
+        <EntityType Name="image">
+          <Key>
+            <PropertyRef Name="imageID" />
+          </Key>
+          <Property Name="imageID" Type="Int32" Nullable="false" />
+          <Property Name="imagePath" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="packageID" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="package" Relationship="Self.FK_images_Pakcage" FromRole="images" ToRole="package" />
+        </EntityType>
+        <EntityType Name="order">
+          <Key>
+            <PropertyRef Name="orderID" />
+          </Key>
+          <Property Name="orderID" Type="Int32" Nullable="false" />
+          <Property Name="packageID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="package" Relationship="Self.FK_order_package" FromRole="order" ToRole="package" />
+          <NavigationProperty Name="user" Relationship="Self.FK_order_users" FromRole="order" ToRole="users" />
+        </EntityType>
+        <EntityType Name="package">
+          <Key>
+            <PropertyRef Name="packageID" />
+          </Key>
+          <Property Name="packageID" Type="Int32" Nullable="false" />
+          <Property Name="packageName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="packageDescription" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="vendorID" Type="Int32" Nullable="false" />
+          <Property Name="packagePrice" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+          <Property Name="itenerary" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_package" FromRole="package" ToRole="Comments" />
+          <NavigationProperty Name="Destinations" Relationship="Self.FK_Destination_package" FromRole="package" ToRole="Destination" />
+          <NavigationProperty Name="images" Relationship="Self.FK_images_Pakcage" FromRole="package" ToRole="images" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_order_package" FromRole="package" ToRole="order" />
+          <NavigationProperty Name="vendor" Relationship="Self.FK_package_vendor" FromRole="package" ToRole="vendor" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_Rating_package" FromRole="package" ToRole="Rating" />
+        </EntityType>
+        <EntityType Name="Rating">
+          <Key>
+            <PropertyRef Name="ratingID" />
+          </Key>
+          <Property Name="ratingID" Type="Int32" Nullable="false" />
+          <Property Name="packageID" Type="Int32" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="rate" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="package" Relationship="Self.FK_Rating_package" FromRole="Rating" ToRole="package" />
+          <NavigationProperty Name="user" Relationship="Self.FK_Rating_users" FromRole="Rating" ToRole="users" />
+        </EntityType>
+        <EntityType Name="scrabbook">
+          <Key>
+            <PropertyRef Name="scrabID" />
+          </Key>
+          <Property Name="scrabID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="userid" Type="Int32" Nullable="false" />
+          <Property Name="image" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="tag" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="user" Relationship="Self.FK_scrabbook_users" FromRole="scrabbook" ToRole="users" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="userID" />
+          </Key>
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <Property Name="roleID" Type="Int32" Nullable="false" />
+          <Property Name="firstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="lastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="contact" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="address" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="dOB" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="Comments" Relationship="Self.FK_Comments_users" FromRole="users" ToRole="Comments" />
+          <NavigationProperty Name="Conversations" Relationship="Self.FK_Conversation_users" FromRole="users" ToRole="Conversation" />
+          <NavigationProperty Name="conversationReplies" Relationship="Self.FK_conversationReply_users" FromRole="users" ToRole="conversationReply" />
+          <NavigationProperty Name="orders" Relationship="Self.FK_order_users" FromRole="users" ToRole="order" />
+          <NavigationProperty Name="Ratings" Relationship="Self.FK_Rating_users" FromRole="users" ToRole="Rating" />
+          <NavigationProperty Name="scrabbooks" Relationship="Self.FK_scrabbook_users" FromRole="users" ToRole="scrabbook" />
+          <NavigationProperty Name="vendors" Relationship="Self.FK_vendor_users" FromRole="users" ToRole="vendor" />
+        </EntityType>
+        <EntityType Name="vendor">
+          <Key>
+            <PropertyRef Name="vendorID" />
+          </Key>
+          <Property Name="vendorID" Type="Int32" Nullable="false" />
+          <Property Name="companyName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="userID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Conversations" Relationship="Self.FK_Conversation_vendor" FromRole="vendor" ToRole="Conversation" />
+          <NavigationProperty Name="packages" Relationship="Self.FK_package_vendor" FromRole="vendor" ToRole="package" />
+          <NavigationProperty Name="user" Relationship="Self.FK_vendor_users" FromRole="vendor" ToRole="users" />
+        </EntityType>
+        <Association Name="FK_Comments_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Comments_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="Comments" Type="Self.Comment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Comments">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Conversation_vendor">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="1" />
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorID" />
+            </Principal>
+            <Dependent Role="Conversation">
+              <PropertyRef Name="vendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_conversationReply_Conversation">
+          <End Role="Conversation" Type="Self.Conversation" Multiplicity="1" />
+          <End Role="conversationReply" Type="Self.conversationReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Conversation">
+              <PropertyRef Name="cID" />
+            </Principal>
+            <Dependent Role="conversationReply">
+              <PropertyRef Name="cID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_conversationReply_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="conversationReply" Type="Self.conversationReply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="conversationReply">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Destination_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="Destination" Type="Self.Destination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="Destination">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_images_Pakcage">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="images" Type="Self.image" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="images">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_order_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="order" Type="Self.order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="order">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_package_vendor">
+          <End Role="vendor" Type="Self.vendor" Multiplicity="1" />
+          <End Role="package" Type="Self.package" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="vendor">
+              <PropertyRef Name="vendorID" />
+            </Principal>
+            <Dependent Role="package">
+              <PropertyRef Name="vendorID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_package">
+          <End Role="package" Type="Self.package" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="package">
+              <PropertyRef Name="packageID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="packageID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Rating_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="Rating" Type="Self.Rating" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="Rating">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_scrabbook_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="scrabbook" Type="Self.scrabbook" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="scrabbook">
+              <PropertyRef Name="userid" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_vendor_users">
+          <End Role="users" Type="Self.user" Multiplicity="1" />
+          <End Role="vendor" Type="Self.vendor" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="users">
+              <PropertyRef Name="userID" />
+            </Principal>
+            <Dependent Role="vendor">
+              <PropertyRef Name="userID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="GhoomoDbContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Comments" EntityType="Self.Comment" />
+          <EntitySet Name="Conversations" EntityType="Self.Conversation" />
+          <EntitySet Name="conversationReplies" EntityType="Self.conversationReply" />
+          <EntitySet Name="Destinations" EntityType="Self.Destination" />
+          <EntitySet Name="images" EntityType="Self.image" />
+          <EntitySet Name="orders" EntityType="Self.order" />
+          <EntitySet Name="packages" EntityType="Self.package" />
+          <EntitySet Name="Ratings" EntityType="Self.Rating" />
+          <EntitySet Name="scrabbooks" EntityType="Self.scrabbook" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+          <EntitySet Name="users" EntityType="Self.user" />
+          <EntitySet Name="vendors" EntityType="Self.vendor" />
+          <AssociationSet Name="FK_Comments_package" Association="Self.FK_Comments_package">
+            <End Role="package" EntitySet="packages" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Comments_users" Association="Self.FK_Comments_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Comments" EntitySet="Comments" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_users" Association="Self.FK_Conversation_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Conversation_vendor" Association="Self.FK_Conversation_vendor">
+            <End Role="vendor" EntitySet="vendors" />
+            <End Role="Conversation" EntitySet="Conversations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_conversationReply_Conversation" Association="Self.FK_conversationReply_Conversation">
+            <End Role="Conversation" EntitySet="Conversations" />
+            <End Role="conversationReply" EntitySet="conversationReplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_conversationReply_users" Association="Self.FK_conversationReply_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="conversationReply" EntitySet="conversationReplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Destination_package" Association="Self.FK_Destination_package">
+            <End Role="package" EntitySet="packages" />
+            <End Role="Destination" EntitySet="Destinations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_images_Pakcage" Association="Self.FK_images_Pakcage">
+            <End Role="package" EntitySet="packages" />
+            <End Role="images" EntitySet="images" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_package" Association="Self.FK_order_package">
+            <End Role="package" EntitySet="packages" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_order_users" Association="Self.FK_order_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="order" EntitySet="orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_package_vendor" Association="Self.FK_package_vendor">
+            <End Role="vendor" EntitySet="vendors" />
+            <End Role="package" EntitySet="packages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_package" Association="Self.FK_Rating_package">
+            <End Role="package" EntitySet="packages" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Rating_users" Association="Self.FK_Rating_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="Rating" EntitySet="Ratings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_scrabbook_users" Association="Self.FK_scrabbook_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="scrabbook" EntitySet="scrabbooks" />
+          </AssociationSet>
+          <AssociationSet Name="FK_vendor_users" Association="Self.FK_vendor_users">
+            <End Role="users" EntitySet="users" />
+            <End Role="vendor" EntitySet="vendors" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="GhoomoDbStoreContainer" CdmEntityContainer="GhoomoDbContext">
+          <EntitySetMapping Name="Comments">
+            <EntityTypeMapping TypeName="GhoomoDb.Comment">
+              <MappingFragment StoreEntitySet="Comments">
+                <ScalarProperty Name="commentID" ColumnName="commentID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="com_datetime" ColumnName="com_datetime" />
+                <ScalarProperty Name="comment1" ColumnName="comment" />
+                <ScalarProperty Name="packageID" ColumnName="packageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conversations">
+            <EntityTypeMapping TypeName="GhoomoDb.Conversation">
+              <MappingFragment StoreEntitySet="Conversation">
+                <ScalarProperty Name="cID" ColumnName="cID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="vendorID" ColumnName="vendorID" />
+                <ScalarProperty Name="time" ColumnName="time" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="conversationReplies">
+            <EntityTypeMapping TypeName="GhoomoDb.conversationReply">
+              <MappingFragment StoreEntitySet="conversationReply">
+                <ScalarProperty Name="crID" ColumnName="crID" />
+                <ScalarProperty Name="reply" ColumnName="reply" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="cID" ColumnName="cID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Destinations">
+            <EntityTypeMapping TypeName="GhoomoDb.Destination">
+              <MappingFragment StoreEntitySet="Destination">
+                <ScalarProperty Name="destID" ColumnName="destID" />
+                <ScalarProperty Name="destination_Name" ColumnName="destination_Name" />
+                <ScalarProperty Name="packageID" ColumnName="packageID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="images">
+            <EntityTypeMapping TypeName="GhoomoDb.image">
+              <MappingFragment StoreEntitySet="images">
+                <ScalarProperty Name="imageID" ColumnName="imageID" />
+                <ScalarProperty Name="imagePath" ColumnName="imagePath" />
+                <ScalarProperty Name="packageID" ColumnName="packageID" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="orders">
+            <EntityTypeMapping TypeName="GhoomoDb.order">
+              <MappingFragment StoreEntitySet="order">
+                <ScalarProperty Name="orderID" ColumnName="orderID" />
+                <ScalarProperty Name="packageID" ColumnName="packageID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="packages">
+            <EntityTypeMapping TypeName="GhoomoDb.package">
+              <MappingFragment StoreEntitySet="package">
+                <ScalarProperty Name="packageID" ColumnName="packageID" />
+                <ScalarProperty Name="packageName" ColumnName="packageName" />
+                <ScalarProperty Name="packageDescription" ColumnName="packageDescription" />
+                <ScalarProperty Name="vendorID" ColumnName="vendorID" />
+                <ScalarProperty Name="packagePrice" ColumnName="packagePrice" />
+                <ScalarProperty Name="itenerary" ColumnName="itenerary" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ratings">
+            <EntityTypeMapping TypeName="GhoomoDb.Rating">
+              <MappingFragment StoreEntitySet="Rating">
+                <ScalarProperty Name="ratingID" ColumnName="ratingID" />
+                <ScalarProperty Name="packageID" ColumnName="packageID" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="rate" ColumnName="rate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="scrabbooks">
+            <EntityTypeMapping TypeName="GhoomoDb.scrabbook">
+              <MappingFragment StoreEntitySet="scrabbook">
+                <ScalarProperty Name="scrabID" ColumnName="scrabID" />
+                <ScalarProperty Name="userid" ColumnName="userid" />
+                <ScalarProperty Name="image" ColumnName="image" />
+                <ScalarProperty Name="tag" ColumnName="tag" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="GhoomoDb.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="GhoomoDb.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="userID" ColumnName="userID" />
+                <ScalarProperty Name="roleID" ColumnName="roleID" />
+                <ScalarProperty Name="firstName" ColumnName="firstName" />
+                <ScalarProperty Name="lastName" ColumnName="lastName" />
+                <ScalarProperty Name="userName" ColumnName="userName" />
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="contact" ColumnName="contact" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="dOB" ColumnName="dOB" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vendors">
+            <EntityTypeMapping TypeName="GhoomoDb.vendor">
+              <MappingFragment StoreEntitySet="vendor">
+                <ScalarProperty Name="vendorID" ColumnName="vendorID" />
+                <ScalarProperty Name="companyName" ColumnName="companyName" />
+                <ScalarProperty Name="userID" ColumnName="userID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
