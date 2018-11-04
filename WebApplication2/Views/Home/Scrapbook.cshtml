@@ -5,22 +5,25 @@
 
 <!DOCTYPE html>
 <head>
-    <link href="~/Scripts/bootstrap.min.js" rel="stylesheet"/>
+    <link href="~/Scripts/bootstrap.min.js" rel="stylesheet" />
 </head>
 <body>
     <div class="container">
 
-        @using(Html.BeginForm("Scrapbook","Home",FormMethod.Post, new {enctype = "multipart/form-data" }))
+        @using (Html.BeginForm("Scrapbook", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
         {
             <div class="form-group">
                 <label>Upload picture</label>
                 <div class="input-group">
-                    @Html.TextBox("picture", "", new { type="file"})<br />
+                    @Html.TextBox("image", "", new { type = "file" })<br />
                     <input type="submit" value="Upload picture" />
+                </div>
+                <label>Tag</label>
+                <div class="input-group">
+                    @Html.TextBox("tag")
                 </div>
             </div>
         }
-
     </div>
 
 

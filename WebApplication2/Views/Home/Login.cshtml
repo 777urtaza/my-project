@@ -3,14 +3,16 @@
     ViewBag.Title = "Login";
 }
 
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+
 <h2>Login</h2>
 <form method="post">
     <p class="text-danger">@(ViewBag.msg)</p>
 
-    <input type="text" name="username" value="" placeholder="Enter Username" />
-
-    <input type="password" name="password" value="" placeholder="Enter password" />
+    <input class="text" type="text" name="username" value="" placeholder="Enter Username" />
+    <input class="text" type="password" name="password" value="" placeholder="Enter password" />
 
     <button name="submit" type="submit">Login</button>
 
 </form>
+

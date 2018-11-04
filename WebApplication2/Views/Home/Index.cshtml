@@ -1,38 +1,24 @@
 ﻿@model WebApplication2.Models.GhoomoDbContext
-
-@if (Session["userID"] != null)
-{
-
-
-
-
-    <p>Welcome @Session["UserName"].ToString()</p>
-}
-    ViewBag.Title = "Welcome to Home Page";
 <div class="container">
-    @*<div class="col-lg-3 col-md-3 col-sm-6">
-        <div class="thumbnail" >
-            <img src="~/Images/1.jpg" alt="" style=""/>
-            <div class="caption">
-                <h3>title</h3>
-                <p><a href="#" class="btn btn-primary" role="button">Pakcage Details</a></p>
-            </div>
-        </div>
-    </div>*@
+
     @foreach (var pkg in Model.packages)
     {
-        <div class="col-lg-3 col-md-4 col-sm-6">
-            <div class="thumbnail">
-                <img src="@Url.Content(pkg.images.First().imagePath)" alt="" >
-                <div class="caption">
-                    <h3>@pkg.packageName</h3>
-                    <p>@pkg.packageDescription</p>
 
+        <div class="col-lg-3 col-md-4 col-sm-6">
+
+            <div class="block1 hov-img-zoom pos-relative m-b-30 thumbnail">
+                <img src="@Url.Content(pkg.images.First().imagePath)" alt="">
+
+                <div class="caption">
+                    <!-- Button -->
+                    <a href="#" class="btn-link">
+                        <h3>@pkg.packageName</h3>
+                    </a>
+                    <p>@pkg.packageDescription</p>
                     <p><a href="#" class="btn btn-primary" role="button">Package Details</a> </p>
+
                 </div>
             </div>
         </div>
     }
-
-
 </div>

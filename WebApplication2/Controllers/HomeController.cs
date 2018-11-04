@@ -50,7 +50,7 @@ namespace WebApplication9.Controllers
             var user = db.users.Where(x => x.userName.Equals(username) && x.password.Equals(password)).ToList();
             if (user.Count == 1)
             {
-                Session["userID"] = user.First().userID;
+                Session["userName"] = user.First().userName;
                 var user2 = user.Single();
                 if (user2.roleID == 1)
                     return Redirect(Url.Action("Index", "Home"));
@@ -63,9 +63,13 @@ namespace WebApplication9.Controllers
                 ViewBag.msg = "Login Failed";
                 return View();
             }
-
         }
 
+        public ActionResult Logout()
+        {
+            Session["userName"] = null;
+            return RedirectToAction("Index");
+        }
         public ActionResult Scrapbook()
         {
             return View();
@@ -78,14 +82,14 @@ namespace WebApplication9.Controllers
                 {
                     string path = Path.Combine(Server.MapPath("~/Images"),
                                                Path.GetFileName(picture.FileName));
-                    
+
                     scrabbook model = new scrabbook();
-                    model.userid = int.Parse(Session["userID"].ToString());
+                    model.userid = 1;
                     model.image = path;
-                    model.tag = "";
+                    model.tag = "#asd";
                     if (ModelState.IsValid)
                     {
-                        db.Entry(model).State = System.Data.Entity.EntityState.Modified;
+                        db.scrabbooks.Add(model);
                         db.SaveChanges();
                     }
                     picture.SaveAs(path);
