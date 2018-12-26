@@ -4,35 +4,40 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="1af44777ba884c64a48f4174b8005a5f" Name="Diagram1" ZoomLevel="87">
-        <EntityTypeShape EntityType="GhoomoDb.Comment" Width="1.5" PointX="6.875" PointY="13.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.Conversation" Width="1.5" PointX="1.25" PointY="11.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.conversationReply" Width="1.5" PointX="3.125" PointY="11.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.Destination" Width="1.5" PointX="10.625" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.image" Width="1.5" PointX="5" PointY="15.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.order" Width="1.5" PointX="7.5" PointY="11.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.package" Width="1.5" PointX="8.75" PointY="13.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.Rating" Width="1.5" PointX="9.5" PointY="11.25" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.scrabbook" Width="1.5" PointX="2.625" PointY="14.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.sysdiagram" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.user" Width="1.5" PointX="5" PointY="11" IsExpanded="true" />
-        <EntityTypeShape EntityType="GhoomoDb.vendor" Width="1.5" PointX="1" PointY="14.625" IsExpanded="true" />
-        <AssociationConnector Association="GhoomoDb.FK_Comments_package" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_Comments_users" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_Conversation_users" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_Conversation_vendor" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_conversationReply_Conversation" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_conversationReply_users" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_Destination_package" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_images_Pakcage" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_order_package" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_order_users" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_package_vendor" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_Rating_package" ManuallyRouted="false" >
-        </AssociationConnector>
-        <AssociationConnector Association="GhoomoDb.FK_Rating_users" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_scrabbook_users" ManuallyRouted="false" />
-        <AssociationConnector Association="GhoomoDb.FK_vendor_users" ManuallyRouted="false" />
+      <Diagram DiagramId="09ca3002070b477ea1065f5b62e8b323" Name="Diagram1" ZoomLevel="100">
+        <EntityTypeShape EntityType="Model.Comment" Width="1.5" PointX="7.5" PointY="16.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Conversation" Width="1.5" PointX="5.25" PointY="16.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.conversationReply" Width="1.5" PointX="4.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Destination" Width="1.5" PointX="9.75" PointY="22.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.image" Width="1.5" PointX="7.375" PointY="24.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.order" Width="1.5" PointX="7.5" PointY="13.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.package" Width="1.5" PointX="6.75" PointY="19.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.planmytrip" Width="1.5" PointX="12.375" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Rating" Width="1.5" PointX="10.5" PointY="16.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.scrabbook" Width="1.5" PointX="3" PointY="19.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.user" Width="1.5" PointX="0.75" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vendor" Width="1.5" PointX="3" PointY="23.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK_Comments_package" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Comments_users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Conversation_users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Conversation_vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_conversationReply_Conversation" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_conversationReply_users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Destination_package" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_images_Pakcage" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_order_package" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_order_users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_package_vendor" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Rating_package" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Rating_users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_scrabbook_users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_vendor_users" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Model.sysdiagram" Width="1.5" PointX="4.625" PointY="7.75" />
+        <AssociationConnector Association="Model.FK_Comments_package1" />
+        <AssociationConnector Association="Model.FK_Destination_package1" />
+        <AssociationConnector Association="Model.FK_images_Pakcage1" />
+        <AssociationConnector Association="Model.FK_order_package1" />
+        <AssociationConnector Association="Model.FK_Rating_package1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

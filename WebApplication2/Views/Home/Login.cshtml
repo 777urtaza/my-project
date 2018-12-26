@@ -7,11 +7,14 @@
 <h2>Login</h2>
 <form method="post">
     <p class="text-danger">@(ViewBag.msg)</p>
+    <div class="form-group">
+        <input class="form-control" type="text" name="username" value="" placeholder="Enter Username" />
+        <input class="form-control" type="password" name="password" value="" placeholder="Enter password" />
+        <br />
+        <button name="submit" type="submit" class="btn btn-primary">Login</button>
 
-    <input class="text" type="text" name="username" value="" placeholder="Enter Username" />
-    <input class="text" type="password" name="password" value="" placeholder="Enter password" />
-
-    <button name="submit" type="submit">Login</button>
+        @Html.ActionLink("Register", "Register", "Home")
+    </div>
 
 </form>
 

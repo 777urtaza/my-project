@@ -6,17 +6,17 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication2.Models;
 
-namespace WebApplication9.Controllers
+namespace WebApplication2.Controllers
 {
     public class HomeController : Controller
     {
         GhoomoDbContext db = new GhoomoDbContext();
         user user2;
+        [HttpGet]
         public ActionResult Index()
         {
             return View(db);
         }
-
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";
@@ -35,6 +35,26 @@ namespace WebApplication9.Controllers
         {
             ViewBag.Message = "This is userpage";
 
+            return View();
+        }
+
+        public ActionResult Register()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Register(user usr, vendor vndr)
+        {
+            if (vndr.companyName.Equals(""))
+            {
+                db.users.Add(usr);
+                db.SaveChanges();
+            }
+            else
+            {
+
+            }
             return View();
         }
 
@@ -74,7 +94,7 @@ namespace WebApplication9.Controllers
         public ActionResult Scrapbook()
         {
 
-            return View();
+            return View(db);
         }
         [HttpPost]
         public ActionResult Scrapbook(HttpPostedFileBase picture, String tag)
@@ -107,6 +127,38 @@ namespace WebApplication9.Controllers
             {
                 ViewBag.Message = "You have not specified a file.";
             }
+            return View(db);
+        }
+
+        public ActionResult pDetails(int pkgid)
+        {
+
+            ViewBag.id = pkgid;
+            List<image> imgs = db.images.Where(x => x.packageID == pkgid).ToList();
+            Console.WriteLine(pkgid);
+            return View(imgs);
+        }
+        
+        public ActionResult vendorPanel()
+        {
+            return View();
+        }
+        public ActionResult addPackage()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult addPackage(package pkg)
+        {
+           
+                db.packages.Add(pkg);
+                db.SaveChanges();
+           
+            return View();
+        }
+        public ActionResult managePackage()
+        {
             return View();
         }
     }

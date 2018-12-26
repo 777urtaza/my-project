@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<h2>Register</h2>
+<br />
+<script src="~/Scripts/jquery-3.0.0.min.js"></script>
+<form method="post" class="form-group">
+    <p class="text-danger">@(ViewBag.msg)</p>
+    <input type="radio" checked name="vORu" value="User" />User
+    <input type="radio" name="vORu" value="Vendor" />Vendor
+    <br />
+    <input class="form-control" type="text" name="firstName" placeholder="Enter First Name" />
+    <input class="form-control" type="text" name="lastName" placeholder="Enter Last Name" />
+    <input class="form-control" type="text" name="userName" placeholder="Enter Username" />
+    <input class="form-control" type="password" name="password" placeholder="Enter password" />
+    <input class="form-control" type="text" name="contact" placeholder="Enter Contact Number" />
+    <input class="form-control" type="text" name="address" placeholder="Enter Address" />
+    <input class="form-control" type="date" name="dOB" placeholder="Enter Date Of Birth" />
+
+   
+    <br />
+    <script>
+        $("[name='vORu']").change(function () {
+            if (this.value == 'Vendor') {
+                $('[name="companyName"]').show();
+            } else {
+                $('[name="companyName"]').hide();
+            }
+        })
+    </script>
+    <input class="form-control" hidden type="text" name="companyName" placeholder="Enter Company Name" />
+    <button type="submit" class="btn btn-default">Submit</button>
+
+</form>

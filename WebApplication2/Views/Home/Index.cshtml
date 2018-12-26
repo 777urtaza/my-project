@@ -1,24 +1,37 @@
 ﻿@model WebApplication2.Models.GhoomoDbContext
 <div class="container">
 
-    @foreach (var pkg in Model.packages)
+    @foreach (var pkg in Model.packages.ToList())
     {
-
         <div class="col-lg-3 col-md-4 col-sm-6">
 
-            <div class="block1 hov-img-zoom pos-relative m-b-30 thumbnail">
-                <img src="@Url.Content(pkg.images.First().imagePath)" alt="">
+            <div class="block hov-img-zoom pos-relative m-b-30 thumbnail">
+                @if (pkg.images.Count != 0)
+                {
+                    <img src="@Url.Content(pkg.images.First().imagePath)" alt="">
 
-                <div class="caption">
-                    <!-- Button -->
-                    <a href="#" class="btn-link">
-                        <h3>@pkg.packageName</h3>
-                    </a>
-                    <p>@pkg.packageDescription</p>
-                    <p><a href="#" class="btn btn-primary" role="button">Package Details</a> </p>
+                    <div class="caption">
+                        <!-- Button -->
+                        <a href="#" class="btn-link">
+                            <h3>@pkg.packageName</h3>
+                        </a>
+                        <p>@pkg.packageDescription</p>
+                        <p>@Html.ActionLink("Package Details", "pDetails", new { @pkgid = pkg.packageID }) </p>
 
-                </div>
+                    </div>
+                }
+                else
+                {
+                    @*<img src="@Url.Content("Not Found image")" alt="">*@
+                    <div class="caption">
+                        <!-- Button -->
+                        <a href="#" class="btn-link">
+                            <h3>Image not Found</h3>
+                        </a>
+                        <p></p>
+                    </div>                }
             </div>
         </div>
+
     }
 </div>

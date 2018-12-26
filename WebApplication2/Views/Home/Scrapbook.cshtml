@@ -1,4 +1,4 @@
-﻿@model WebApplication2.Models.user
+﻿@model WebApplication2.Models.GhoomoDbContext
 @{
     ViewBag.Title = "Scrapbook";
 }
@@ -26,6 +26,23 @@
             </div>
         }
     </div>
+    
+    <h2>Scrapbook</h2>
+    <div class="container">
+        @foreach (var sb in Model.scrabbooks)
+        {
+            <div class="col-lg-3 col-md-4 col-sm-6">
+
+                <div class="block1 hov-img-zoom pos-relative m-b-30">
+                    <img src="@Url.Content(sb.image)" alt="">
+
+                    <div class="caption">
+                        <p>@sb.tag</p>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
 
 
 </body>
@@ -34,5 +51,4 @@
 
 
 
-<h2>Scrapbook</h2>
 

@@ -153,18 +153,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Comment.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Conversation.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\conversationReply.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Destination.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\GhoomoDb.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -180,30 +168,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>GhoomoDb.edmx</DependentUpon>
     </Compile>
-    <Compile Include="Models\image.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\order.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\package.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\Rating.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\scrabbook.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\sysdiagram.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\user.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\vendor.cs">
-      <DependentUpon>GhoomoDb.tt</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -211,17 +175,22 @@
     <Content Include="App_Data\GhoomoDb_log.ldf">
       <DependentUpon>GhoomoDb.mdf</DependentUpon>
     </Content>
-    <Content Include="Content\bootstrap-theme.css" />
-    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap-grid.css" />
+    <Content Include="Content\bootstrap-grid.min.css" />
+    <Content Include="Content\bootstrap-reboot.css" />
+    <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\main.css" />
     <Content Include="Content\util.css" />
     <Content Include="favicon.ico" />
-    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Images\1.jpg" />
+    <Content Include="ApplicationInsights.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\bootstrap.js.map" />
     <Content Include="Models\GhoomoDb.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>GhoomoDb.edmx</DependentUpon>
@@ -232,17 +201,8 @@
       <DependentUpon>GhoomoDb.edmx</DependentUpon>
       <LastGenOutput>GhoomoDb.cs</LastGenOutput>
     </Content>
-    <Content Include="ApplicationInsights.config">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <EntityDeploy Include="Models\GhoomoDb.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>GhoomoDb.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\GhoomoDb.edmx.diagram">
-      <DependentUpon>GhoomoDb.edmx</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js" />
+    <Content Include="Scripts\bootstrap.bundle.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\esm\popper-utils.js" />
@@ -253,21 +213,23 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Scripts\bootstrap.min.js.map" />
+    <Content Include="Scripts\bootstrap.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.min.js.map" />
+    <Content Include="Scripts\bootstrap.bundle.js.map" />
     <Content Include="Content\bootstrap.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
-    <Content Include="Content\bootstrap-theme.min.css.map" />
-    <Content Include="Content\bootstrap-theme.css.map" />
-    <None Include="Scripts\jquery-3.0.0-vsdoc.js" />
-    <Content Include="Scripts\jquery-3.0.0.js" />
-    <Content Include="Scripts\jquery-3.0.0.min.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.min.js" />
-    <Content Include="Scripts\jquery-3.0.0.slim.min.map" />
-    <Content Include="Scripts\jquery-3.0.0.min.map" />
+    <Content Include="Content\bootstrap-reboot.min.css.map" />
+    <Content Include="Content\bootstrap-reboot.css.map" />
+    <Content Include="Content\bootstrap-grid.min.css.map" />
+    <Content Include="Content\bootstrap-grid.css.map" />
+    <EntityDeploy Include="Models\GhoomoDb.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GhoomoDb.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\GhoomoDb.edmx.diagram">
+      <DependentUpon>GhoomoDb.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
@@ -284,6 +246,7 @@
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />
     <Content Include="Scripts\umd\popper.min.js" />
+    <Content Include="Views\Home\vendorpanel-html.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -312,6 +275,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Home\Register.cshtml" />
+    <Content Include="Views\Home\pDetails.cshtml" />
+    <Content Include="Views\Home\vendorPanel.cshtml" />
+    <Content Include="Views\Home\addPackage.cshtml" />
+    <Content Include="Views\Home\managePackage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="Scripts\index.d.ts" />
@@ -323,6 +291,7 @@
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

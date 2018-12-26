@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewBag.Title = "addPackage";
+}
+
+<h2>addPackage</h2>
+
+<form method="post" class="form-group">
+    <p class="text-danger">@(ViewBag.msg)</p>
+    <input class="form-control" type="text" name="packageName" placeholder="Package Name" />
+    <input class="form-control" type="text" name="packageDescription" placeholder="Description" />
+    <input class="form-control" type="number" name="vendorID" placeholder="Price" />
+    <input class="form-control" type="text" name="pkgitenerary" placeholder="Itenerary" />
+    <br />
+
+    <select class="select2-dropdown">
+        <option value="a">a</option>
+        <option value="b">b</option>
+        <option value="c">c</option>
+        <option value="d">d</option>
+    </select>
+    <p>multiple destinations</p>
+    <br />
+    <div class="container">
+
+        @using (Html.BeginForm("Scrapbook", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            <div class="form-group">
+
+                <label>Upload picture</label>
+                <div class="input-group">
+                    @Html.TextBox("picture", "", new { type = "file" })<br />
+                    
+                </div>
+                <label>Tag</label>
+                <div class="input-group">
+                    @Html.TextBox("tag", "");
+                </div>
+            </div>
+        }
+    </div>
+
+
+    <button type="submit" class="btn-primary">Submit</button>
+
+</form>
